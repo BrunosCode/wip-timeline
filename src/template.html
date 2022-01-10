@@ -7,6 +7,27 @@
   <title>Wip Timeline</title>
 </head>
 <body>
-  <h1>Wip Timeline</h1>
+  <main class="main">
+    <h1>My wonderfull timeline</h1>
+
+    <!-- filters and buttons -->
+    <div class="flex">
+      <input class="input" type="datetime-local" name="start-date" id="start-date">
+      <input class="input" type="datetime-local" name="end-date" id="end-date">
+      <button class="btn" id="apply-filters">Search</button>
+      <button class="btn" id="inverte">Change order</button>
+    </div>
+
+    <section class="timeline flex flex--vertical" id="timeline">
+      <!-- timeline node example -->
+      <div class="timeline__node">
+        <div class="timeline__balloon">
+          <h3 class="timeline__title">Planet</h3>
+          <p class="timeline__datetime">Planet</p>
+        </div>
+      </div>
+      
+    </section>
+  </main>
 </body>
 </html>
