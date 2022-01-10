@@ -1,6 +1,132 @@
+@import "scss/variables";
+@import "scss/mixins";
+@import "scss/layouts";
+
+// Reset
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
 body {
-  background-color: blue;
-  h1 {
-    color: red;
+  font-family: Helvetica, sans-serif;
+}
+
+.main {
+  background-color: $gray-200;
+  min-height: 100vh;
+  padding: 2rem 2rem;
+
+  &__title {
+    font-weight: 400;
+    margin-bottom: 1rem;
+  }
+}
+
+.input {
+  background-color: $white;
+  color: $black;
+  border: solid .1rem $white;
+
+  @include btn-shape;
+}
+
+.btn {
+  background-color: $white;
+  color: $black;
+  border: solid .1rem white;
+
+  text-transform: uppercase;
+  font-weight: 700;
+
+  @include btn-shape;
+
+  &:hover {
+    cursor: pointer;
+    background-color: $black;
+    color: $gray-100;
+  }
+}
+
+.timeline {
+  padding: 0 1rem;
+
+  &__node {
+    padding: 1rem 0;
+    border-left: .15rem solid $black;
+    flex-grow: 1;
+    // Node circle
+    &::before {
+      position: relative;
+      left: -.575rem;
+      @include node-circle;
+    }
+  }
+
+  &__balloon {
+    position: relative;
+    background-color: $black;
+    margin-left: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+    flex-grow: 1;
+    // Ballon pointer
+    &::before {
+      transform: translate(-50%, -50%) rotate(45deg) ;
+      left: 0;
+      @include balloon-pointer;
+    }
+  }
+
+  @media screen and (min-width: 800px) {
+    &__node {
+      width: calc(50% + .075rem);
+      align-self: flex-end;
+      
+      // change node direction
+      &:nth-of-type(even) {
+        align-self: flex-start;
+        border-right: .15rem solid $black;
+        border-left: none;
+
+        // Node circle other direction
+        &::after {
+          position: relative;
+          right: -.575rem;
+          @include node-circle;
+        }
+        &::before {
+          display: none;
+        }
+        
+        & .timeline__balloon {
+          margin-right: 1rem;
+          text-align: right;
+      
+          // Ballon pointer other direction
+          &::after {
+            right: 0;
+            transform: translate(50%, -50%) rotate(45deg);
+            @include balloon-pointer;
+          }
+          &::before {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+
+  &__title {
+    color: $gray-100;
+    font-weight: 400;
+    margin-bottom: .5rem;
+  }
+  &__datetime {
+    color: $red;
+    font-weight: 700;
   }
 }

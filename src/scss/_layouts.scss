@@ -1,0 +1,25 @@
+.container {
+  padding: 0 2rem;
+}
+
+// mobile
+.mobile-flex {
+  display: flex;
+
+  &--col {
+    flex-direction: column;
+  }
+
+  &--justifyCenter {
+    align-items: center;
+  }
+}
+
+// desktop
+@media screen and (min-width: 800px) {
+  .desk-flex {
+    &--row {
+      flex-direction: row;
+    }
+  }
+}

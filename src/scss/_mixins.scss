@@ -1,0 +1,24 @@
+@mixin btn-shape {
+  border-radius: 0.75rem;
+  padding: 0.5rem 1rem;
+  margin: 0 0.5rem 0.5rem;
+}
+
+@mixin node-circle {
+  display: block;
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  background-color: $black;
+}
+
+@mixin balloon-pointer {
+  position: absolute;
+  top: 50%;
+  display: block;
+  content: "";
+  width: 1rem;
+  height: 1rem;
+  background-color: $black;
+}
