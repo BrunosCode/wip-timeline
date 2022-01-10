@@ -6,7 +6,6 @@ const formatDate = (nodeDate) => {
   let dateObject = new Date(nodeDate);
   let date = dateObject.toLocaleString('it-IT', options);
   let formatedDate = date.replaceAll("/", "-").replaceAll(",", "");
-  console.log(formatedDate);
   return formatedDate;
 }
 

@@ -44,12 +44,41 @@ body {
 
   @include btn-shape;
 
+  & .arrow {
+    position: relative;
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 3px;
+    margin-left: .25rem;
+  
+    &.up {
+      top: 3px;
+      transform: rotate(-135deg);
+      -webkit-transform: rotate(-135deg);
+    }
+    
+    &.down {
+      bottom: 4px;
+      transform: rotate(45deg);
+      -webkit-transform: rotate(45deg);
+    }
+  }
+
   &:hover {
     cursor: pointer;
     background-color: $black;
     color: $gray-100;
+
+    & .arrow {
+      border: solid white;
+      border-width: 0 3px 3px 0;
+    }
   }
+
 }
+
+
 
 .timeline {
   padding: 0 1rem;
