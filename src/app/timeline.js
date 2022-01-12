@@ -26,6 +26,12 @@ export const addToTimeline = (id, lineNodes) => {
     let nodeHtml = document.createElement('div');
     nodeHtml.classList.add('timeline__node', 'mobile-flex', 'mobile-flex--alignCenter');
     nodeHtml.innerHTML = `
+        <div class="planet">
+          <div class="planet__cloud planet__cloud--1"></div>
+          <div class="planet__cloud planet__cloud--2"></div>
+          <div class="planet__cloud planet__cloud--3"></div>
+          <div class="planet__cloud planet__cloud--4"></div>
+        </div>
         <div class="timeline__balloon">
           <h3 class="timeline__title"><small class="sm-show--none lg-show">Planet:</small> ${node.name}</h3>
           <p class="timeline__datetime"><span class="sm-show--none lg-show">Discovered on</span> ${formatDateTime(

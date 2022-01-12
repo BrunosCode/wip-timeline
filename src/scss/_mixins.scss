@@ -4,12 +4,19 @@
   margin: 0.25rem;
 }
 
-@mixin node-circle {
-  display: block;
-  content: "";
+@mixin planet {
   border-radius: 50%;
-  border: none;
+  border: solid 1px $white;
   background-color: $black;
+  overflow: hidden;
+  z-index: 1;
+}
+@mixin small-cloud {
+  content: "";
+  display: block;
+  border-radius: 25%;
+  position: absolute;
+  z-index: 3;
 }
 
 @mixin balloon-pointer {

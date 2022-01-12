@@ -36,9 +36,9 @@ body {
   left: 0;
   right: 0;
   padding: 1rem 2rem;
-  z-index: 1;
+  z-index: 4;
   background-color: $gray-200;
-  
+
   &__top {
     height: 2rem;
     margin-bottom: 1rem;
@@ -57,41 +57,40 @@ body {
   background-color: inherit;
   height: 1.5rem;
   width: 1.5rem;
-  
-  &__bar1, 
-  &__bar2, 
+
+  &__bar1,
+  &__bar2,
   &__bar3 {
     width: 100%;
-    height: calc(100% / 2 / 3);
+    height: calc(100% / 6);
     background-color: $black;
     transition: 0.4s;
   }
-  &__bar1, 
+  &__bar1,
   &__bar2 {
     margin-bottom: 25%;
   }
-  
+
   /* Rotate first bar */
   &--open &__bar1 {
     transform: translate(0, 250%) rotate(-45deg);
   }
-  
+
   /* Fade out the second bar */
   &--open &__bar2 {
     opacity: 0;
   }
-  
+
   /* Rotate last bar */
   &--open &__bar3 {
     transform: translate(0, -250%) rotate(45deg);
   }
 }
 
-
 .input {
   background-color: $white;
   color: $black;
-  border: solid .1rem $white;
+  border: solid 0.1rem $white;
   font-family: Helvetica, sans-serif;
   margin-left: auto;
 }
@@ -105,7 +104,7 @@ body {
 .btn {
   background-color: $white;
   color: $black;
-  border: solid .1rem white;
+  border: solid 0.1rem white;
 
   text-transform: uppercase;
   font-weight: 700;
@@ -116,16 +115,16 @@ body {
     position: relative;
     border: solid black;
     display: inline-block;
-    padding: .2rem;
-    margin-left: .5rem;
-  
+    padding: 0.2rem;
+    margin-left: 0.5rem;
+
     &.up {
-      border-width: 0 .2rem .2rem 0;
+      border-width: 0 0.2rem 0.2rem 0;
       transform: translateY(-30%) rotate(45deg);
     }
-    
+
     &.down {
-      border-width: .2rem 0 0 .2rem;
+      border-width: 0.2rem 0 0 0.2rem;
       transform: translateY(30%) rotate(45deg);
     }
   }
@@ -139,11 +138,9 @@ body {
       border-color: white;
     }
   }
-
 }
 
-
-
+// TIMELINE
 .timeline {
   position: relative;
 
@@ -151,7 +148,7 @@ body {
   &::before {
     content: "";
     position: absolute;
-    width: .15rem;
+    width: 0.15rem;
     left: 0;
     top: 0;
     height: 100%;
@@ -160,65 +157,173 @@ body {
   }
 
   &__node {
-    padding: 1rem .5rem;
+    padding: 1rem 0.5rem;
     flex-grow: 1;
-    // Globe
-    &::before {
-      position: absolute;
-      right: 50%;
-      transform: translateX(50%);
-      width: 0;
-      height: 0;
-      @include node-circle;
-    }
   }
 
   &__balloon {
     position: relative;
     background-color: $black;
-    margin-left: 1rem;
+    margin-left: 2rem;
     padding: 1rem 2rem;
     border-radius: 1rem;
     flex-grow: 1;
-    // before animation
-    transform: scale(0, 0);
     // Ballon pointer
     &::before {
-      transform: translate(-50%, -50%) rotate(45deg) ;
+      transform: translate(-50%, -50%) rotate(45deg);
       left: 0;
       @include balloon-pointer;
     }
+
+    // before animation
+    transform: scale(0, 0);
+    // animate in
+    .animate-in & {
+      transform: scale(1, 1);
+      animation: fade-in 1.5s;
+    }
   }
 
-  @media screen and (min-width: 600px) {
+  &__title {
+    color: $gray-100;
+    font-weight: 400;
+    margin-bottom: 0.5rem;
+  }
+  &__datetime {
+    color: $red;
+    font-weight: 700;
+  }
+}
+
+.planet {
+  position: absolute;
+  left: 0;
+  transform: translateX(-50%);
+  @include planet;
+
+  // before animate in
+  width: 0;
+  height: 0;
+  // after
+  .animate-in & {
+    width: 3rem;
+    height: 3rem;
+    transition: width 1s, height 1s;
+  }
+
+  &__cloud {
+    position: absolute;
+    border-radius: 25%;
+    z-index: 2;
+    background-color: $white;
+
+    &--1 {
+      width: 20%;
+      height: 5%;
+      left: -20%;
+      top: 20%;
+
+      &::after {
+        left: 15%;
+        top: 100%;
+        @include small-cloud;
+        width: 70%;
+        height: 40%;
+        background-color: $gray-300;
+      }
+
+      .animate-in & {
+        animation: cloud--1 infinite 5s;
+      }
+    }
+    &--2 {
+      width: 80%;
+      height: 20%;
+      left: -80%;
+      top: 45%;
+
+      &::after {
+        left: -20%;
+        top: 60%;
+        @include small-cloud;
+        width: 100%;
+        height: 70%;
+        background-color: $gray-200;
+      }
+
+      .animate-in & {
+        animation: cloud--2 infinite 12s;
+      }
+    }
+    &--3 {
+      width: 30%;
+      height: 15%;
+      left: -30%;
+      top: 70%;
+
+      &::after {
+        right: 10%;
+        top: 90%;
+        @include small-cloud;
+        width: 60%;
+        height: 40%;
+        background-color: $gray-500;
+      }
+
+      .animate-in & {
+        animation: cloud--3 infinite 7s;
+      }
+    }
+    &--4 {
+      width: 50%;
+      height: 10%;
+      left: -100%;
+      top: 35%;
+
+      &::after {
+        left: 15%;
+        top: 50%;
+        @include small-cloud;
+        width: 50%;
+        height: 60%;
+        background-color: $gray-300;
+      }
+
+      .animate-in & {
+        animation: cloud--4 infinite 15s;
+      }
+    }
+  }
+}
+
+// MEDIAQUERY
+@media screen and (min-width: 600px) {
+  .timeline {
     // line
     &::before {
-      left: calc(50% - .075rem);
+      left: calc(50% - 0.075rem);
     }
 
     &__node {
       width: 50%;
       align-self: flex-end;
-      
+
       // change node direction
       &:nth-of-type(even) {
         align-self: flex-start;
 
         // Globe other direction
-        &::after {
-          position: absolute;
+        .planet {
           left: 50%;
+          right: unset;
           transform: translateX(-50%);
-          @include node-circle;
         }
-        &::before {
-          display: none;
-        }
-        
+
         & .timeline__balloon {
-          margin-right: 1rem;
+          margin-right: 2rem;
+          margin-left: 0;
           text-align: right;
-      
+
           // Ballon pointer other direction
           &::after {
             right: 0;
@@ -230,34 +335,14 @@ body {
           }
         }
       }
+      &:nth-of-type(odd) {
+        // Globe other direction
+        .planet {
+          right: 50%;
+          left: unset;
+          transform: translateX(50%);
+        }
+      }
     }
   }
-
-  &__title {
-    color: $gray-100;
-    font-weight: 400;
-    margin-bottom: .5rem;
-  }
-  &__datetime {
-    color: $red;
-    font-weight: 700;
-  }
-}
-
-.animate-in.timeline__node {
-  
-  // Animations
-  // Circle
-  &::before,
-  &::after {
-    width: 1rem;
-    height: 1rem;
-    transition: 1s;
-  }
-  // balloon
-  & .timeline__balloon {
-    transform: scale(1, 1);
-    animation: fade-in 1.5s;
-  }
-
 }
