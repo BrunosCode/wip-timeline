@@ -11,15 +11,28 @@
   }
 
   &--justifyCenter {
+    justify-content: center;
+  }
+  &--justifySpaceEvenly {
+    justify-content: space-evenly;
+  }
+  &--justifySpaceBetween {
+    justify-content: space-between;
+  }
+  &--alignCenter {
     align-items: center;
   }
 }
 
 // desktop
-@media screen and (min-width: 800px) {
+@media screen and (min-width: 900px) {
   .desk-flex {
     &--row {
       flex-direction: row;
+    }
+
+    &--justifySpaceBetween {
+      justify-content: space-between;
     }
   }
 }

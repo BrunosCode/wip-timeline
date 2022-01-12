@@ -15,6 +15,7 @@ let nextUrl = null;
 let nodesArray = [];
 let order = null;
 
+// AXIOS FUNCTION
 const apiCall = (url) => {
   axios(url)
     .then((res) => {
@@ -32,10 +33,8 @@ const apiCall = (url) => {
     });
 };
 
-window.onload = () => {
-  // on window load call the api
-  apiCall(startUrl);
-};
+// START SCRIPT
+apiCall(startUrl);
 
 window.onscroll = () => {
   // when user reach the bottom add other nodes
@@ -65,3 +64,8 @@ filterBtn.addEventListener("click", () => {
   // filter timeline
   addToTimeline("timeline", filterTimeline(nodesArray));
 });
+
+document.getElementById("burger-btn").addEventListener("click", () => {
+  document.getElementById("burger-btn").classList.toggle("burger--open");
+  document.getElementById("header-menu").classList.toggle("sm-show--none");
+})

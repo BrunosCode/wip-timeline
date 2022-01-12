@@ -1,6 +1,8 @@
 @import "scss/variables";
 @import "scss/mixins";
 @import "scss/layouts";
+@import "scss/animations";
+@import "scss/utilities";
 
 // Reset
 *,
@@ -11,6 +13,10 @@
   margin: 0;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   font-family: Helvetica, sans-serif;
 }
@@ -18,19 +24,81 @@ body {
 .main {
   background-color: $gray-200;
   min-height: 100vh;
-  padding: 2rem 2rem;
+  padding-top: 4rem;
+
+  @media screen and (min-width: 900px) {
+    padding-top: 7rem;
+  }
+}
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 1rem 2rem;
+  z-index: 1;
+  background-color: $gray-200;
+  
+  &__top {
+    height: 2rem;
+    margin-bottom: 1rem;
+  }
 
   &__title {
     font-weight: 400;
-    margin-bottom: 1rem;
+    font-size: 1.5rem;
   }
 }
+
+.burger {
+  display: block;
+  cursor: pointer;
+  border: none;
+  background-color: inherit;
+  height: 1.5rem;
+  width: 1.5rem;
+  
+  &__bar1, 
+  &__bar2, 
+  &__bar3 {
+    width: 100%;
+    height: calc(100% / 2 / 3);
+    background-color: $black;
+    transition: 0.4s;
+  }
+  &__bar1, 
+  &__bar2 {
+    margin-bottom: 25%;
+  }
+  
+  /* Rotate first bar */
+  &--open &__bar1 {
+    transform: translate(0, 250%) rotate(-45deg);
+  }
+  
+  /* Fade out the second bar */
+  &--open &__bar2 {
+    opacity: 0;
+  }
+  
+  /* Rotate last bar */
+  &--open &__bar3 {
+    transform: translate(0, -250%) rotate(45deg);
+  }
+}
+
 
 .input {
   background-color: $white;
   color: $black;
   border: solid .1rem $white;
-
+  font-family: Helvetica, sans-serif;
+  margin-left: auto;
+}
+.label {
+  background-color: $white;
+  color: $black;
+  flex-shrink: 1;
   @include btn-shape;
 }
 
@@ -47,21 +115,18 @@ body {
   & .arrow {
     position: relative;
     border: solid black;
-    border-width: 0 3px 3px 0;
     display: inline-block;
-    padding: 3px;
-    margin-left: .25rem;
+    padding: .2rem;
+    margin-left: .5rem;
   
     &.up {
-      top: 3px;
-      transform: rotate(-135deg);
-      -webkit-transform: rotate(-135deg);
+      border-width: 0 .2rem .2rem 0;
+      transform: translateY(-30%) rotate(45deg);
     }
     
     &.down {
-      bottom: 4px;
-      transform: rotate(45deg);
-      -webkit-transform: rotate(45deg);
+      border-width: .2rem 0 0 .2rem;
+      transform: translateY(30%) rotate(45deg);
     }
   }
 
@@ -71,8 +136,7 @@ body {
     color: $gray-100;
 
     & .arrow {
-      border: solid white;
-      border-width: 0 3px 3px 0;
+      border-color: white;
     }
   }
 
@@ -81,16 +145,30 @@ body {
 
 
 .timeline {
-  padding: 0 1rem;
+  position: relative;
+
+  // line
+  &::before {
+    content: "";
+    position: absolute;
+    width: .15rem;
+    left: 0;
+    top: 0;
+    height: 100%;
+    background-color: $black;
+    transition: height 1s linear;
+  }
 
   &__node {
-    padding: 1rem 0;
-    border-left: .15rem solid $black;
+    padding: 1rem .5rem;
     flex-grow: 1;
-    // Node circle
+    // Globe
     &::before {
-      position: relative;
-      left: -.575rem;
+      position: absolute;
+      right: 50%;
+      transform: translateX(50%);
+      width: 0;
+      height: 0;
       @include node-circle;
     }
   }
@@ -102,6 +180,8 @@ body {
     padding: 1rem 2rem;
     border-radius: 1rem;
     flex-grow: 1;
+    // before animation
+    transform: scale(0, 0);
     // Ballon pointer
     &::before {
       transform: translate(-50%, -50%) rotate(45deg) ;
@@ -110,21 +190,25 @@ body {
     }
   }
 
-  @media screen and (min-width: 800px) {
+  @media screen and (min-width: 600px) {
+    // line
+    &::before {
+      left: calc(50% - .075rem);
+    }
+
     &__node {
-      width: calc(50% + .075rem);
+      width: 50%;
       align-self: flex-end;
       
       // change node direction
       &:nth-of-type(even) {
         align-self: flex-start;
-        border-right: .15rem solid $black;
-        border-left: none;
 
-        // Node circle other direction
+        // Globe other direction
         &::after {
-          position: relative;
-          right: -.575rem;
+          position: absolute;
+          left: 50%;
+          transform: translateX(-50%);
           @include node-circle;
         }
         &::before {
@@ -158,4 +242,22 @@ body {
     color: $red;
     font-weight: 700;
   }
+}
+
+.animate-in.timeline__node {
+  
+  // Animations
+  // Circle
+  &::before,
+  &::after {
+    width: 1rem;
+    height: 1rem;
+    transition: 1s;
+  }
+  // balloon
+  & .timeline__balloon {
+    transform: scale(1, 1);
+    animation: fade-in 1.5s;
+  }
+
 }

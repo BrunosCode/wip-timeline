@@ -1,0 +1,33 @@
+// utilities
+.sm-show {
+  &--none {
+    display: none;
+  }
+}
+.md-show {
+  @media screen and (min-width: 600px) {
+    display: unset;
+
+    &--flex {
+      display: flex;
+    }
+
+    &--none {
+      display: none;
+    }
+  }
+}
+
+.lg-show {
+  @media screen and (min-width: 900px) {
+    display: unset;
+
+    &--flex {
+      display: flex;
+    }
+
+    &--none {
+      display: none;
+    }
+  }
+}

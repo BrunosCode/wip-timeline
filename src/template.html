@@ -10,25 +10,40 @@
 
 <body>
   <main class="main container">
-    <h1 class="main__title">My wonderfull timeline</h1>
+    <header class="header">
+      <div class="header__top mobile-flex mobile-flex--justifySpaceBetween mobile-flex--alignCenter">
+        <h1 class="header__title">Discovered Planeta</h1>
+        <button id="burger-btn" class="burger lg-show--none">
+          <div class="burger__bar1"></div>
+          <div class="burger__bar2"></div>
+          <div class="burger__bar3"></div>
+        </button>
+      </div>
 
-    <!-- filters and buttons -->
-    <div class="mobile-flex mobile-flex--col desk-flex--row">
-      <input class="input" type="datetime-local" name="start-date" id="start-date">
-      <input class="input" type="datetime-local" name="end-date" id="end-date">
-      <button class="btn" id="filter-btn">Search</button>
-      <button class="btn" id="inverte-btn">Change order <i class="arrow down"></i></button>
-    </div>
+      <!-- filters and buttons -->
+      <div id="header-menu" class="header__menu mobile-flex mobile-flex--col desk-flex--row desk-flex--justifySpaceBetween sm-show--none lg-show--flex">
+        <label class="label" for="start-date">
+          <span class="md-show--none lg-show">After: </span>
+          <input class="input" type="datetime-local" name="start-date" id="start-date">
+        </label>
+        <label class="label" for="end-date">
+          <span class="md-show--none lg-show">Before: </span>
+          <input class="input" type="datetime-local" name="end-date" id="end-date">
+        </label>
+        <button class="btn" id="filter-btn">Search</button>
+        <button class="btn" id="inverte-btn">Change order <i class="arrow down"></i></button>
+      </div>
+    </header>
 
     <section class="timeline mobile-flex mobile-flex--col" id="timeline">
       <!-- timeline node example -->
-      <!-- <div class="timeline__node mobile-flex mobile-flex--justifyCenter">
+      <!-- <div class="timeline__node mobile-flex mobile-flex--alignCenter">
         <div class="timeline__balloon">
           <h3 class="timeline__title">Planet</h3>
           <p class="timeline__datetime">Planet</p>
         </div>
       </div> -->
-      
+
 
     </section>
   </main>
